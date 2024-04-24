@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  GalleryViewController.swift
 //  Infinite Gallery
 //
 //  Created by Arthur Avagyan on 24.04.24.
@@ -7,13 +7,9 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class GalleryViewController: Controller<GalleryViewModel, GalleryView> {
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		// Do any additional setup after loading the view.
 	}
-
-
 }
-

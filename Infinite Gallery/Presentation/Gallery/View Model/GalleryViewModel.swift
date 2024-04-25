@@ -7,31 +7,45 @@
 
 import Foundation
 import Combine
-
+import RealmSwift
 
 final class GalleryViewModel: ViewModel {
 	
 	private(set) var onReload = PassthroughSubject<Void, Never>()
 
 	var dataModels: [AlbumModel] = []
-	
+
 	init() {
+		let result = RealmManager.shared.getAllObjects(ofType: AlbumModel.self)
+		if let result, !result.isEmpty {
+			dataModels = Array(result)
+			onReload.send()
+			return
+		}
 		fetchAlbums { albums in
 			albums.forEach { [weak self] album in
 				guard let self else { return }
 				fetchPhotos(albumId: album.id) { [weak self] photos in
 					guard let self else { return }
 					
-					let albumModel = AlbumModel(album: album, photos: photos)
-					
-					if let index = self.dataModels.firstIndex(where: { $0.id > albumModel.id }) {
-						self.dataModels.insert(albumModel, at: index)
-					} else {
-						self.dataModels.append(albumModel)
-					}
-					
-					if dataModels.count == albums.count {
-						onReload.send()
+					// I am not sure about the solution, but on the first execution app crashes because "Realm accessed from incorrect thread."
+					// I guess the reason is data being written on background thread here, and later used in the main thread in AlbumViewModel.swift: 29
+					// An on the second execution GalleryViewModel.swift:19 runs on the main thread, and that's why it works the second time
+					DispatchQueue.main.async {
+						let albumModel = AlbumModel()
+						albumModel.update(with: album, photos: photos)
+						
+						RealmManager.shared.saveObject(albumModel)
+						
+						if let index = self.dataModels.firstIndex(where: { $0.id > albumModel.id }) {
+							self.dataModels.insert(albumModel, at: index)
+						} else {
+							self.dataModels.append(albumModel)
+						}
+						
+						if self.dataModels.count == albums.count {
+							self.onReload.send()
+						}
 					}
 				}
 			}

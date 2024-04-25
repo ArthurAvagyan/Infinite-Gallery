@@ -18,7 +18,7 @@ final class AlbumView: View<AlbumViewModel> {
 		}
 	}
 	
-	private let collectionView: UICollectionView = {
+	let collectionView: UICollectionView = {
 		
 		let layout = UICollectionViewFlowLayout()
 		layout.scrollDirection = .horizontal
@@ -74,22 +74,22 @@ final class AlbumView: View<AlbumViewModel> {
 extension AlbumView: UICollectionViewDelegate {
 	
 	func scrollViewDidScroll(_ scrollView: UIScrollView) {
-		let itemSize = collectionView.contentSize.width / CGFloat(viewModel.photos.count)
+		let itemSize = collectionView.contentSize.width / CGFloat(viewModel.photoModels.count)
 		
 		if scrollView.contentOffset.x > itemSize {
 			
-			if let firstItem = viewModel.photos.first {
-				viewModel.photos.removeFirst()
-				viewModel.photos.append(firstItem)
+			if let firstItem = viewModel.photoModels.first {
+				viewModel.photoModels.removeFirst()
+				viewModel.photoModels.append(firstItem)
 				collectionView.contentOffset.x -= itemSize
 				collectionView.reloadData()
 			}
 		}
 		if scrollView.contentOffset.x < 0 {
 			
-			if let lastItem = viewModel.photos.last {
-				viewModel.photos.removeLast()
-				viewModel.photos.insert(lastItem, at: 0)
+			if let lastItem = viewModel.photoModels.last {
+				viewModel.photoModels.removeLast()
+				viewModel.photoModels.insert(lastItem, at: 0)
 				collectionView.contentOffset.x += itemSize
 				collectionView.reloadData()
 			}
@@ -100,15 +100,12 @@ extension AlbumView: UICollectionViewDelegate {
 extension AlbumView: UICollectionViewDataSource {
 	
 	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-		viewModel.photos.count
+		viewModel.photoModels.count
 	}
 	
 	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 		let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ImageCell.identifier, for: indexPath) as! ImageCell
-		
-		let index = indexPath.row % viewModel.photos.count
-
-		cell.configure(with: viewModel.photos[index])
+		cell.configure(with: viewModel.photos[indexPath.item])
 		return cell
 	}
 }

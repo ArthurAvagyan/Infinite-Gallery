@@ -27,6 +27,8 @@
 		56E8343E2BDAB3DD00C0259A /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E8343D2BDAB3DD00C0259A /* Photo.swift */; };
 		56E834402BDAB42500C0259A /* Album.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E8343F2BDAB42500C0259A /* Album.swift */; };
 		56E834422BDAB98C00C0259A /* AlbumModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E834412BDAB98C00C0259A /* AlbumModel.swift */; };
+		56E834452BDADDE900C0259A /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E834442BDADDE900C0259A /* RealmManager.swift */; };
+		56E834472BDAFC9C00C0259A /* PhotoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E834462BDAFC9C00C0259A /* PhotoModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,6 +54,8 @@
 		56E8343D2BDAB3DD00C0259A /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
 		56E8343F2BDAB42500C0259A /* Album.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Album.swift; sourceTree = "<group>"; };
 		56E834412BDAB98C00C0259A /* AlbumModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumModel.swift; sourceTree = "<group>"; };
+		56E834442BDADDE900C0259A /* RealmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
+		56E834462BDAFC9C00C0259A /* PhotoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoModel.swift; sourceTree = "<group>"; };
 		D4EC94A478998EBFBF860972 /* Pods_Infinite_Gallery.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Infinite_Gallery.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FD6B40051F2DF4EBAF509ED1 /* Pods-Infinite Gallery.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Infinite Gallery.debug.xcconfig"; path = "Target Support Files/Pods-Infinite Gallery/Pods-Infinite Gallery.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -121,6 +125,7 @@
 			isa = PBXGroup;
 			children = (
 				56E8343D2BDAB3DD00C0259A /* Photo.swift */,
+				56E834462BDAFC9C00C0259A /* PhotoModel.swift */,
 				56E8343F2BDAB42500C0259A /* Album.swift */,
 				56E834412BDAB98C00C0259A /* AlbumModel.swift */,
 			);
@@ -141,6 +146,7 @@
 			children = (
 				56E834392BDAB32300C0259A /* APIManager.swift */,
 				56E8343B2BDAB32E00C0259A /* RequestManager.swift */,
+				56E834442BDADDE900C0259A /* RealmManager.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -199,7 +205,6 @@
 				FD6B40051F2DF4EBAF509ED1 /* Pods-Infinite Gallery.debug.xcconfig */,
 				09A885CDCD1F35B660816A6D /* Pods-Infinite Gallery.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -322,6 +327,8 @@
 				56E834282BD98E8B00C0259A /* View.swift in Sources */,
 				56E834302BD9961200C0259A /* ImageCell.swift in Sources */,
 				56E834092BD987EC00C0259A /* AppDelegate.swift in Sources */,
+				56E834472BDAFC9C00C0259A /* PhotoModel.swift in Sources */,
+				56E834452BDADDE900C0259A /* RealmManager.swift in Sources */,
 				56E834292BD98E8B00C0259A /* ViewModel.swift in Sources */,
 				56E8340B2BD987EC00C0259A /* SceneDelegate.swift in Sources */,
 				56E834402BDAB42500C0259A /* Album.swift in Sources */,
@@ -388,7 +395,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -451,7 +458,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;

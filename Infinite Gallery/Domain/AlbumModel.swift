@@ -6,17 +6,24 @@
 //
 
 import Foundation
+import RealmSwift
 
-struct AlbumModel {
-	let userId: Int
-	let id: Int
-	let title: String
-	let photos: [Photo]
+class AlbumModel: Object {
+	@Persisted(primaryKey: true) var id: Int
+	@Persisted var title: String
+	@Persisted var photos: List<PhotoModel>
 	
-	init(album: Album, photos: [Photo]) {
-		userId = album.userId
+	func update(with album: Album, photos: [Photo]) {
 		id = album.id
 		title = album.title
-		self.photos = photos
+		let photoModels = photos.map { photo in
+			let model = PhotoModel()
+			model.albumId = photo.albumId
+			model.id = photo.id
+			model.title = photo.title
+			model.url = photo.url.absoluteString
+			return model
+		}
+		self.photos.append(objectsIn: photoModels)
 	}
 }

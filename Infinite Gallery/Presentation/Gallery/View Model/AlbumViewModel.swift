@@ -8,6 +8,7 @@
 import Foundation
 import UIKit.UIImage
 import Combine
+import RealmSwift
 
 final class AlbumViewModel: ViewModel {
 	
@@ -16,23 +17,30 @@ final class AlbumViewModel: ViewModel {
 	private(set) var onReload = PassthroughSubject<Void, Never>()
 	private(set) var onReloadAtIndex = PassthroughSubject<Int, Never>()
 	
-	private var photoModels: [Photo] = []
-	var photos: [UIImage?] = []
+	var photoModels: [PhotoModel] = []
+	var photos: [UIImage?] {
+		photoModels.map { photo in
+			guard let data = photo.image else { return nil }
+			return UIImage(data: data)
+		}
+	}
 	
 	func update(with model: AlbumModel) {
-		photoModels = model.photos
-		guard photos.isEmpty else { return }
+		photoModels = Array(model.photos)
+
 		photoModels.enumerated().forEach { (index, photo) in
-			photos.append(nil)
-			
-			URLSession.shared.dataTaskPublisher(for: photo.url)
+			guard let url = URL(string: photo.url),
+				  photo.image == nil else { return }
+			URLSession.shared.dataTaskPublisher(for: url)
 				.map { UIImage(data: $0.data) }
 				.replaceError(with: nil)
 				.receive(on: DispatchQueue.main)
 				.sink(receiveValue: { [weak self] image in
 					guard let self else { return }
-					photos[index] = image
-					onReloadAtIndex.send(index)
+					RealmManager.shared.write {
+						self.photoModels[index].image = image?.pngData()
+						self.onReloadAtIndex.send(index)
+					}
 				})
 				.store(in: &cancellables)
 		}

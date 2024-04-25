@@ -24,7 +24,7 @@ final class AlbumCell: UICollectionViewCell {
 		return view
 	}()
 		
-	override init(frame: CGRect){
+	override init(frame: CGRect) {
 		super.init(frame: frame)
 		contentView.addSubview(containerView)
 	}
@@ -41,12 +41,11 @@ final class AlbumCell: UICollectionViewCell {
 	
 	override func prepareForReuse() {
 		super.prepareForReuse()
-		contentView.backgroundColor = UIColor.red
-		containerView.invalidateLayout()
+
 	}
 	
-	func configure(with model: Model){
-		contentView.backgroundColor = model.backgroundColour
+	func configure(with model: AlbumModel) {
+		containerView.viewModel.update(with: model)
 	}
 	
 }

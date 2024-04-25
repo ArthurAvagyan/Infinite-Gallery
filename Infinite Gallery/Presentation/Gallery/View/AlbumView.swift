@@ -18,10 +18,6 @@ final class AlbumView: View<AlbumViewModel> {
 		}
 	}
 	
-	func invalidateLayout() {
-		collectionView.collectionViewLayout.invalidateLayout()
-	}
-	
 	private let collectionView: UICollectionView = {
 		
 		let layout = UICollectionViewFlowLayout()
@@ -29,7 +25,7 @@ final class AlbumView: View<AlbumViewModel> {
 		layout.sectionInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
 		layout.minimumInteritemSpacing = 10
 		layout.minimumLineSpacing = 10
-		layout.itemSize = CGSize(width: (UIScreen.main.bounds.size.width - 40)/3, height: ((UIScreen.main.bounds.size.height / 2)))
+		layout.itemSize = CGSize(width: (UIScreen.main.bounds.size.width - 40) / 1.5, height: ((UIScreen.main.bounds.size.height / 2)))
 		
 		let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
 		collectionView.translatesAutoresizingMaskIntoConstraints = false
@@ -59,20 +55,44 @@ final class AlbumView: View<AlbumViewModel> {
 	}
 	
 	func setupBindings() {
+		viewModel.onReload
+			.receive(on: DispatchQueue.main)
+			.sink { [weak self] _ in
+				self?.collectionView.reloadData()
+			}
+			.store(in: &cancellables)
 		
+		viewModel.onReloadAtIndex
+			.receive(on: DispatchQueue.main)
+			.sink { [weak self] index in
+				self?.collectionView.reloadItems(at: [IndexPath(item: index, section: 0)])
+			}
+			.store(in: &cancellables)
 	}
 }
 
 extension AlbumView: UICollectionViewDelegate {
 	
 	func scrollViewDidScroll(_ scrollView: UIScrollView) {
-		let itemSize = collectionView.contentSize.width / CGFloat(viewModel.models.count + 3)
+		let itemSize = collectionView.contentSize.width / CGFloat(viewModel.photos.count)
 		
-		if scrollView.contentOffset.x > itemSize * CGFloat(viewModel.models.count){
-			collectionView.contentOffset.x -= itemSize * CGFloat(viewModel.models.count)
+		if scrollView.contentOffset.x > itemSize {
+			
+			if let firstItem = viewModel.photos.first {
+				viewModel.photos.removeFirst()
+				viewModel.photos.append(firstItem)
+				collectionView.contentOffset.x -= itemSize
+				collectionView.reloadData()
+			}
 		}
-		if scrollView.contentOffset.x < 0  {
-			collectionView.contentOffset.x += itemSize * CGFloat(viewModel.models.count)
+		if scrollView.contentOffset.x < 0 {
+			
+			if let lastItem = viewModel.photos.last {
+				viewModel.photos.removeLast()
+				viewModel.photos.insert(lastItem, at: 0)
+				collectionView.contentOffset.x += itemSize
+				collectionView.reloadData()
+			}
 		}
 	}
 }
@@ -80,15 +100,15 @@ extension AlbumView: UICollectionViewDelegate {
 extension AlbumView: UICollectionViewDataSource {
 	
 	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-		viewModel.models.count + 3
+		viewModel.photos.count
 	}
 	
 	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 		let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ImageCell.identifier, for: indexPath) as! ImageCell
 		
-		let index = indexPath.row % viewModel.models.count
+		let index = indexPath.row % viewModel.photos.count
 
-		cell.configure(with: viewModel.models[index])
+		cell.configure(with: viewModel.photos[index])
 		return cell
 	}
 }

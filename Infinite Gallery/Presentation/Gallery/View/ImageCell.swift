@@ -7,24 +7,21 @@
 
 import UIKit
 
-struct Model{
-	let text: String
-	let backgroundColour: UIColor
-}
-
 class ImageCell: UICollectionViewCell {
 	static let identifier = "cell"
 	
-	private let label: UILabel = {
-		let label = UILabel()
-		label.textColor = .white
-		label.textAlignment = .center
-		label.font = .systemFont(ofSize: 20, weight: .medium)
-		return label
+	private let imageView: UIImageView = {
+		let imageView = UIImageView(frame: .zero)
+		imageView.contentMode = .scaleAspectFill
+		imageView.clipsToBounds = true
+		imageView.layer.masksToBounds = true
+		imageView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+		return imageView
 	}()
+	
 	override init(frame: CGRect){
 		super.init(frame: frame)
-		contentView.addSubview(label)
+		contentView.addSubview(imageView)
 	}
 	
 	required init?(coder: NSCoder) {
@@ -33,20 +30,17 @@ class ImageCell: UICollectionViewCell {
 	
 	override func layoutSubviews() {
 		super.layoutSubviews()
-		label.frame = contentView.bounds
+		imageView.frame = contentView.bounds
 		contentView.layer.cornerRadius = 10
+		contentView.backgroundColor = .gray
 	}
 	
 	override func prepareForReuse() {
 		super.prepareForReuse()
-		contentView.backgroundColor = UIColor.red
-		label.text = ""
+		imageView.image = nil
 	}
 	
-	func configure(with model: Model){
-		contentView.backgroundColor = model.backgroundColour
-		label.text = model.text
+	func configure(with image: UIImage?) {
+		imageView.image = image
 	}
-	
-	
 }

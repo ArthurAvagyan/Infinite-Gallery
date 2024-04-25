@@ -29,12 +29,13 @@ class ViewClass<T: ViewModel>: UIView {
 		self.viewModel = viewModel
 		super.init(frame: frame)
 		
-		guard let self = self as? View<T> else {
-			fatalError("must conform to View to implement Subviewable & Bindable protocols")
+		if let self = self as? Subviewable {
+			self.setupViews()
+			self.setupConstraints()
 		}
-		self.setupViews()
-		self.setupConstraints()
-		self.setupBindings()
+		if let self = self as? Bindable {
+			self.setupBindings()
+		}
 	}
 	
 	required init?(coder: NSCoder) {

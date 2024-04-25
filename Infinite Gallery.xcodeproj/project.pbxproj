@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		50959C16B4FC137DD1ED07F9 /* Pods_Infinite_Gallery.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4EC94A478998EBFBF860972 /* Pods_Infinite_Gallery.framework */; };
 		56E834092BD987EC00C0259A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E834082BD987EC00C0259A /* AppDelegate.swift */; };
 		56E8340B2BD987EC00C0259A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E8340A2BD987EC00C0259A /* SceneDelegate.swift */; };
 		56E8340D2BD987EC00C0259A /* GalleryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E8340C2BD987EC00C0259A /* GalleryViewController.swift */; };
@@ -29,6 +30,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		09A885CDCD1F35B660816A6D /* Pods-Infinite Gallery.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Infinite Gallery.release.xcconfig"; path = "Target Support Files/Pods-Infinite Gallery/Pods-Infinite Gallery.release.xcconfig"; sourceTree = "<group>"; };
 		56E834052BD987EC00C0259A /* Infinite Gallery.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Infinite Gallery.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		56E834082BD987EC00C0259A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		56E8340A2BD987EC00C0259A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -50,6 +52,8 @@
 		56E8343D2BDAB3DD00C0259A /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
 		56E8343F2BDAB42500C0259A /* Album.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Album.swift; sourceTree = "<group>"; };
 		56E834412BDAB98C00C0259A /* AlbumModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumModel.swift; sourceTree = "<group>"; };
+		D4EC94A478998EBFBF860972 /* Pods_Infinite_Gallery.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Infinite_Gallery.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FD6B40051F2DF4EBAF509ED1 /* Pods-Infinite Gallery.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Infinite Gallery.debug.xcconfig"; path = "Target Support Files/Pods-Infinite Gallery/Pods-Infinite Gallery.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,17 +61,28 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				50959C16B4FC137DD1ED07F9 /* Pods_Infinite_Gallery.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		075D24B26019739DACE9B751 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D4EC94A478998EBFBF860972 /* Pods_Infinite_Gallery.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		56E833FC2BD987EC00C0259A = {
 			isa = PBXGroup;
 			children = (
 				56E834072BD987EC00C0259A /* Infinite Gallery */,
 				56E834062BD987EC00C0259A /* Products */,
+				FEEDE45CAF941C4D06F71537 /* Pods */,
+				075D24B26019739DACE9B751 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -178,6 +193,16 @@
 			path = "View Model";
 			sourceTree = "<group>";
 		};
+		FEEDE45CAF941C4D06F71537 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				FD6B40051F2DF4EBAF509ED1 /* Pods-Infinite Gallery.debug.xcconfig */,
+				09A885CDCD1F35B660816A6D /* Pods-Infinite Gallery.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -185,9 +210,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 56E834192BD987F200C0259A /* Build configuration list for PBXNativeTarget "Infinite Gallery" */;
 			buildPhases = (
+				537844F38B88ED97CA9B6E41 /* [CP] Check Pods Manifest.lock */,
 				56E834012BD987EC00C0259A /* Sources */,
 				56E834022BD987EC00C0259A /* Frameworks */,
 				56E834032BD987EC00C0259A /* Resources */,
+				E2D4840E23AFC987B559C97C /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -242,6 +269,48 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		537844F38B88ED97CA9B6E41 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Infinite Gallery-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E2D4840E23AFC987B559C97C /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Infinite Gallery/Pods-Infinite Gallery-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Infinite Gallery/Pods-Infinite Gallery-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Infinite Gallery/Pods-Infinite Gallery-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		56E834012BD987EC00C0259A /* Sources */ = {
@@ -403,6 +472,7 @@
 		};
 		56E8341A2BD987F200C0259A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = FD6B40051F2DF4EBAF509ED1 /* Pods-Infinite Gallery.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -431,6 +501,7 @@
 		};
 		56E8341B2BD987F200C0259A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 09A885CDCD1F35B660816A6D /* Pods-Infinite Gallery.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

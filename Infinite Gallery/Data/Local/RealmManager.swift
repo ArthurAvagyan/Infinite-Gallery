@@ -14,11 +14,12 @@ class RealmManager {
 	
 	private init() {}
 	
-	// MARK: - Realm Configuration
+	private var realm: Realm!
 	
+	// MARK: - Realm Configuration
 	func configure() {
 		do {
-			let realm = try Realm()
+			realm = try Realm()
 			print("Realm file location: \(realm.configuration.fileURL?.absoluteString ?? "Not found")")
 		} catch {
 			print("Error initializing Realm: \(error.localizedDescription)")
@@ -26,17 +27,8 @@ class RealmManager {
 	}
 	
 	// MARK: - CRUD Operations
-	func write(_ block: (() -> Void)) {
-		do {
-			let realm = try Realm()
-			try realm.write(block)
-		} catch {
-			print("Error saving object to Realm: \(error.localizedDescription)")
-		}
-	}
 	func saveObject<T: Object>(_ object: T) {
 		do {
-			let realm = try Realm()
 			try realm.write {
 				realm.add(object, update: .modified)
 			}
@@ -47,7 +39,6 @@ class RealmManager {
 	
 	func deleteObject<T: Object>(_ object: T) {
 		do {
-			let realm = try Realm()
 			try realm.write {
 				realm.delete(object)
 			}
@@ -56,23 +47,11 @@ class RealmManager {
 		}
 	}
 	
-	func getAllObjects<T: Object>(ofType type: T.Type) -> Results<T>? {
-		do {
-			let realm = try Realm()
-			return realm.objects(type)
-		} catch {
-			print("Error retrieving objects from Realm: \(error.localizedDescription)")
-			return nil
-		}
+	func getAllObjects<T: Object>(ofType type: T.Type) -> Results<T> {
+		realm.objects(type)
 	}
 	
 	func getObject<T: Object, KeyType>(ofType type: T.Type, primaryKey: KeyType) -> T? {
-		do {
-			let realm = try Realm()
-			return realm.object(ofType: type, forPrimaryKey: primaryKey)
-		} catch {
-			print("Error retrieving object from Realm: \(error.localizedDescription)")
-			return nil
-		}
+		realm.object(ofType: type, forPrimaryKey: primaryKey)
 	}
 }

@@ -13,5 +13,4 @@ class PhotoModel: Object {
 	@Persisted var id: Int
 	@Persisted var title: String
 	@Persisted var url: String
-	@Persisted var image: Data? = nil
 }

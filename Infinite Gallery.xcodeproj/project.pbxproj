@@ -31,6 +31,7 @@
 		56E834472BDAFC9C00C0259A /* PhotoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E834462BDAFC9C00C0259A /* PhotoModel.swift */; };
 		56E8344D2BDC0B6500C0259A /* AlbumUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E8344C2BDC0B6500C0259A /* AlbumUseCase.swift */; };
 		56E8344F2BDC0B6D00C0259A /* GalleryUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E8344E2BDC0B6D00C0259A /* GalleryUseCase.swift */; };
+		56E834512BDC297800C0259A /* ImageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E834502BDC297800C0259A /* ImageModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -60,6 +61,7 @@
 		56E834462BDAFC9C00C0259A /* PhotoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoModel.swift; sourceTree = "<group>"; };
 		56E8344C2BDC0B6500C0259A /* AlbumUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumUseCase.swift; sourceTree = "<group>"; };
 		56E8344E2BDC0B6D00C0259A /* GalleryUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryUseCase.swift; sourceTree = "<group>"; };
+		56E834502BDC297800C0259A /* ImageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageModel.swift; sourceTree = "<group>"; };
 		D4EC94A478998EBFBF860972 /* Pods_Infinite_Gallery.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Infinite_Gallery.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FD6B40051F2DF4EBAF509ED1 /* Pods-Infinite Gallery.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Infinite Gallery.debug.xcconfig"; path = "Target Support Files/Pods-Infinite Gallery/Pods-Infinite Gallery.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -207,6 +209,7 @@
 				56E8343D2BDAB3DD00C0259A /* Photo.swift */,
 				56E834412BDAB98C00C0259A /* AlbumModel.swift */,
 				56E834462BDAFC9C00C0259A /* PhotoModel.swift */,
+				56E834502BDC297800C0259A /* ImageModel.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -214,8 +217,8 @@
 		56E834492BDC08BA00C0259A /* Use Cases */ = {
 			isa = PBXGroup;
 			children = (
-				56E8344C2BDC0B6500C0259A /* AlbumUseCase.swift */,
 				56E8344E2BDC0B6D00C0259A /* GalleryUseCase.swift */,
+				56E8344C2BDC0B6500C0259A /* AlbumUseCase.swift */,
 			);
 			path = "Use Cases";
 			sourceTree = "<group>";
@@ -371,6 +374,7 @@
 				56E8340B2BD987EC00C0259A /* SceneDelegate.swift in Sources */,
 				56E834402BDAB42500C0259A /* Album.swift in Sources */,
 				56E834342BD99E3F00C0259A /* GalleryViewModel.swift in Sources */,
+				56E834512BDC297800C0259A /* ImageModel.swift in Sources */,
 				56E8344F2BDC0B6D00C0259A /* GalleryUseCase.swift in Sources */,
 				56E8342A2BD98E8B00C0259A /* Controller.swift in Sources */,
 				56E8343E2BDAB3DD00C0259A /* Photo.swift in Sources */,

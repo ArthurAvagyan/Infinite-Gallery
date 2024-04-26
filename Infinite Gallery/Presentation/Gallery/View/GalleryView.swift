@@ -28,12 +28,9 @@ final class GalleryView: View<GalleryViewModel> {
 		return collectionView
 	}()
 	
-	private var storedOffsets: [CGFloat?] = []
-
 	func setupViews() {
 		collectionView.delegate = self
 		collectionView.dataSource = self
-		storedOffsets = Array(repeating: nil, count: viewModel.dataModels.count)
 		addSubview(collectionView)
 	}
 	
@@ -51,7 +48,14 @@ final class GalleryView: View<GalleryViewModel> {
 			.receive(on: DispatchQueue.main)
 			.sink { [weak self] _ in
 				guard let self else { return }
-				storedOffsets = Array(repeating: nil, count: viewModel.dataModels.count)
+				collectionView.reloadData()
+			}
+			.store(in: &cancellables)
+		
+		viewModel.onReloadWithOffset
+			.sink { [weak self] offset in
+				guard let self else { return }
+				collectionView.contentOffset.y += offset
 				collectionView.reloadData()
 			}
 			.store(in: &cancellables)
@@ -61,35 +65,16 @@ final class GalleryView: View<GalleryViewModel> {
 extension GalleryView: UICollectionViewDelegate {
 	
 	func scrollViewDidScroll(_ scrollView: UIScrollView) {
-		let itemSize = collectionView.contentSize.height / CGFloat(viewModel.dataModels.count)
-	
-		if scrollView.contentOffset.y > itemSize {
-			viewModel.dataModels.move(fromOffsets: IndexSet(integer: 0), toOffset: viewModel.dataModels.count)
-			updateOffsets()
-			storedOffsets.move(fromOffsets: IndexSet(integer: 0), toOffset: viewModel.dataModels.count)
-			collectionView.contentOffset.y -= itemSize
-			collectionView.reloadData()
-		}
-		if scrollView.contentOffset.y < 0 {
-			viewModel.dataModels.move(fromOffsets: IndexSet(integer: viewModel.dataModels.count - 1), toOffset: 0)
-			updateOffsets()
-			storedOffsets.move(fromOffsets: IndexSet(integer: viewModel.dataModels.count - 1), toOffset: 0)
-			collectionView.contentOffset.y += itemSize
-			collectionView.reloadData()
-		}
-	}
-	
-	func updateOffsets() {
-		(0..<viewModel.dataModels.count).forEach {
-			if let cell = collectionView.cellForItem(at: IndexPath(item: $0, section: 0)) {
-				storedOffsets[$0] = (cell as! AlbumCell).contentOffset
-			}
+		let estimatedItemSize = collectionView.contentSize.height / CGFloat(viewModel.dataModels.count)
+		
+		viewModel.scrolled(by: scrollView.contentOffset.y, with: estimatedItemSize) { indexPath in
+			(collectionView.cellForItem(at: indexPath) as? AlbumCell)?.contentOffset
 		}
 	}
 	
 	func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
 		let cell = cell as! AlbumCell
-		cell.contentOffset = storedOffsets[indexPath.item] ?? 0
+		cell.contentOffset = viewModel.storedOffsets[indexPath.item] ?? 0
 	}
 }
 

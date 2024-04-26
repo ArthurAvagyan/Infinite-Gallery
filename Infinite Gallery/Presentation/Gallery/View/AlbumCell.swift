@@ -67,5 +67,4 @@ final class AlbumCell: UICollectionViewCell {
 		containerView.viewModel.update(with: model)
 		label.text = model.title
 	}
-	
 }

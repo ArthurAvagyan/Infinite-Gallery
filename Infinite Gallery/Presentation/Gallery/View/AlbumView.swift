@@ -19,7 +19,6 @@ final class AlbumView: View<AlbumViewModel> {
 	}
 	
 	let collectionView: UICollectionView = {
-		
 		let layout = UICollectionViewFlowLayout()
 		layout.scrollDirection = .horizontal
 		layout.sectionInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
@@ -55,17 +54,20 @@ final class AlbumView: View<AlbumViewModel> {
 	}
 	
 	func setupBindings() {
-		viewModel.onReload
-			.receive(on: DispatchQueue.main)
-			.sink { [weak self] _ in
-				self?.collectionView.reloadData()
-			}
-			.store(in: &cancellables)
-		
 		viewModel.onReloadAtIndex
 			.receive(on: DispatchQueue.main)
 			.sink { [weak self] index in
-				self?.collectionView.reloadItems(at: [IndexPath(item: index, section: 0)])
+				UIView.performWithoutAnimation {
+					self?.collectionView.reloadItems(at: [IndexPath(item: index, section: 0)])
+				}
+			}
+			.store(in: &cancellables)
+		
+		viewModel.onReloadWithOffset
+			.sink { [weak self] offset in
+				guard let self else { return }
+				collectionView.contentOffset.x += offset
+				collectionView.reloadData()
 			}
 			.store(in: &cancellables)
 	}
@@ -74,26 +76,8 @@ final class AlbumView: View<AlbumViewModel> {
 extension AlbumView: UICollectionViewDelegate {
 	
 	func scrollViewDidScroll(_ scrollView: UIScrollView) {
-		let itemSize = collectionView.contentSize.width / CGFloat(viewModel.photoModels.count)
-		
-		if scrollView.contentOffset.x > itemSize {
-			
-			if let firstItem = viewModel.photoModels.first {
-				viewModel.photoModels.removeFirst()
-				viewModel.photoModels.append(firstItem)
-				collectionView.contentOffset.x -= itemSize
-				collectionView.reloadData()
-			}
-		}
-		if scrollView.contentOffset.x < 0 {
-			
-			if let lastItem = viewModel.photoModels.last {
-				viewModel.photoModels.removeLast()
-				viewModel.photoModels.insert(lastItem, at: 0)
-				collectionView.contentOffset.x += itemSize
-				collectionView.reloadData()
-			}
-		}
+		let estimatedItemSize = collectionView.contentSize.width / CGFloat(viewModel.photoModels.count)
+		viewModel.scrolled(by: scrollView.contentOffset.x, with: estimatedItemSize)
 	}
 }
 

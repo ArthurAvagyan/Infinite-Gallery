@@ -29,6 +29,8 @@
 		56E834422BDAB98C00C0259A /* AlbumModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E834412BDAB98C00C0259A /* AlbumModel.swift */; };
 		56E834452BDADDE900C0259A /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E834442BDADDE900C0259A /* RealmManager.swift */; };
 		56E834472BDAFC9C00C0259A /* PhotoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E834462BDAFC9C00C0259A /* PhotoModel.swift */; };
+		56E8344D2BDC0B6500C0259A /* AlbumUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E8344C2BDC0B6500C0259A /* AlbumUseCase.swift */; };
+		56E8344F2BDC0B6D00C0259A /* GalleryUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E8344E2BDC0B6D00C0259A /* GalleryUseCase.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -56,6 +58,8 @@
 		56E834412BDAB98C00C0259A /* AlbumModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumModel.swift; sourceTree = "<group>"; };
 		56E834442BDADDE900C0259A /* RealmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
 		56E834462BDAFC9C00C0259A /* PhotoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoModel.swift; sourceTree = "<group>"; };
+		56E8344C2BDC0B6500C0259A /* AlbumUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumUseCase.swift; sourceTree = "<group>"; };
+		56E8344E2BDC0B6D00C0259A /* GalleryUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryUseCase.swift; sourceTree = "<group>"; };
 		D4EC94A478998EBFBF860972 /* Pods_Infinite_Gallery.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Infinite_Gallery.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FD6B40051F2DF4EBAF509ED1 /* Pods-Infinite Gallery.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Infinite Gallery.debug.xcconfig"; path = "Target Support Files/Pods-Infinite Gallery/Pods-Infinite Gallery.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -124,10 +128,8 @@
 		56E8341D2BD98C6800C0259A /* Domain */ = {
 			isa = PBXGroup;
 			children = (
-				56E8343D2BDAB3DD00C0259A /* Photo.swift */,
-				56E834462BDAFC9C00C0259A /* PhotoModel.swift */,
-				56E8343F2BDAB42500C0259A /* Album.swift */,
-				56E834412BDAB98C00C0259A /* AlbumModel.swift */,
+				56E834492BDC08BA00C0259A /* Use Cases */,
+				56E834482BDC08AD00C0259A /* Entities */,
 			);
 			path = Domain;
 			sourceTree = "<group>";
@@ -144,9 +146,8 @@
 		56E8341F2BD98C7700C0259A /* Data */ = {
 			isa = PBXGroup;
 			children = (
-				56E834392BDAB32300C0259A /* APIManager.swift */,
-				56E8343B2BDAB32E00C0259A /* RequestManager.swift */,
-				56E834442BDADDE900C0259A /* RealmManager.swift */,
+				56E8344B2BDC08D500C0259A /* Remote */,
+				56E8344A2BDC08CC00C0259A /* Local */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -197,6 +198,43 @@
 				56E834222BD98D6500C0259A /* AlbumViewModel.swift */,
 			);
 			path = "View Model";
+			sourceTree = "<group>";
+		};
+		56E834482BDC08AD00C0259A /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				56E8343F2BDAB42500C0259A /* Album.swift */,
+				56E8343D2BDAB3DD00C0259A /* Photo.swift */,
+				56E834412BDAB98C00C0259A /* AlbumModel.swift */,
+				56E834462BDAFC9C00C0259A /* PhotoModel.swift */,
+			);
+			path = Entities;
+			sourceTree = "<group>";
+		};
+		56E834492BDC08BA00C0259A /* Use Cases */ = {
+			isa = PBXGroup;
+			children = (
+				56E8344C2BDC0B6500C0259A /* AlbumUseCase.swift */,
+				56E8344E2BDC0B6D00C0259A /* GalleryUseCase.swift */,
+			);
+			path = "Use Cases";
+			sourceTree = "<group>";
+		};
+		56E8344A2BDC08CC00C0259A /* Local */ = {
+			isa = PBXGroup;
+			children = (
+				56E834442BDADDE900C0259A /* RealmManager.swift */,
+			);
+			path = Local;
+			sourceTree = "<group>";
+		};
+		56E8344B2BDC08D500C0259A /* Remote */ = {
+			isa = PBXGroup;
+			children = (
+				56E834392BDAB32300C0259A /* APIManager.swift */,
+				56E8343B2BDAB32E00C0259A /* RequestManager.swift */,
+			);
+			path = Remote;
 			sourceTree = "<group>";
 		};
 		FEEDE45CAF941C4D06F71537 /* Pods */ = {
@@ -333,10 +371,12 @@
 				56E8340B2BD987EC00C0259A /* SceneDelegate.swift in Sources */,
 				56E834402BDAB42500C0259A /* Album.swift in Sources */,
 				56E834342BD99E3F00C0259A /* GalleryViewModel.swift in Sources */,
+				56E8344F2BDC0B6D00C0259A /* GalleryUseCase.swift in Sources */,
 				56E8342A2BD98E8B00C0259A /* Controller.swift in Sources */,
 				56E8343E2BDAB3DD00C0259A /* Photo.swift in Sources */,
 				56E8342C2BD98EB000C0259A /* AlbumView.swift in Sources */,
 				56E834422BDAB98C00C0259A /* AlbumModel.swift in Sources */,
+				56E8344D2BDC0B6500C0259A /* AlbumUseCase.swift in Sources */,
 				56E8343A2BDAB32300C0259A /* APIManager.swift in Sources */,
 				56E8343C2BDAB32E00C0259A /* RequestManager.swift in Sources */,
 				56E834322BD99DDA00C0259A /* GalleryView.swift in Sources */,

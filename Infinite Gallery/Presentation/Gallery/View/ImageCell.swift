@@ -32,6 +32,7 @@ class ImageCell: UICollectionViewCell {
 		super.layoutSubviews()
 		imageView.frame = contentView.bounds
 		contentView.layer.cornerRadius = 10
+		contentView.layer.masksToBounds = true
 		contentView.backgroundColor = .gray
 	}
 	

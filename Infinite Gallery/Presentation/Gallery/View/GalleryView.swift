@@ -10,14 +10,7 @@ import UIKit
 final class GalleryView: View<GalleryViewModel> {
 	
 	private let collectionView: UICollectionView = {
-		let layout = UICollectionViewFlowLayout()
-		layout.scrollDirection = .vertical
-		layout.sectionInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
-		layout.minimumInteritemSpacing = 10
-		layout.minimumLineSpacing = 10
-		layout.itemSize = CGSize(width: (UIScreen.main.bounds.size.width - 20), height: ((UIScreen.main.bounds.size.height) / 4))
-		
-		let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+		let collectionView = UICollectionView(frame: .zero, collectionViewLayout: CustomCollectionViewLayout())
 		collectionView.translatesAutoresizingMaskIntoConstraints = false
 		collectionView.showsHorizontalScrollIndicator = false
 		collectionView.showsVerticalScrollIndicator = false
@@ -53,10 +46,12 @@ final class GalleryView: View<GalleryViewModel> {
 			.store(in: &cancellables)
 		
 		viewModel.onReloadWithOffset
-			.sink { [weak self] offset in
+			.sink { [weak self] (offset, fromIndexPath, toIndexPath) in
 				guard let self else { return }
-				collectionView.contentOffset.y += offset
-				collectionView.reloadData()
+				UIView.performWithoutAnimation {
+					self.collectionView.contentOffset.y += offset
+					self.collectionView.moveItem(at: fromIndexPath, to: toIndexPath)
+				}
 			}
 			.store(in: &cancellables)
 	}

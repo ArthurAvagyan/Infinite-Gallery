@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2B1F5BC02BDFBD9400DAFE57 /* GalleryLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1F5BBF2BDFBD9400DAFE57 /* GalleryLayout.swift */; };
 		50959C16B4FC137DD1ED07F9 /* Pods_Infinite_Gallery.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4EC94A478998EBFBF860972 /* Pods_Infinite_Gallery.framework */; };
 		56E834092BD987EC00C0259A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E834082BD987EC00C0259A /* AppDelegate.swift */; };
 		56E8340B2BD987EC00C0259A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E8340A2BD987EC00C0259A /* SceneDelegate.swift */; };
@@ -36,6 +37,7 @@
 
 /* Begin PBXFileReference section */
 		09A885CDCD1F35B660816A6D /* Pods-Infinite Gallery.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Infinite Gallery.release.xcconfig"; path = "Target Support Files/Pods-Infinite Gallery/Pods-Infinite Gallery.release.xcconfig"; sourceTree = "<group>"; };
+		2B1F5BBF2BDFBD9400DAFE57 /* GalleryLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryLayout.swift; sourceTree = "<group>"; };
 		56E834052BD987EC00C0259A /* Infinite Gallery.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Infinite Gallery.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		56E834082BD987EC00C0259A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		56E8340A2BD987EC00C0259A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -84,6 +86,14 @@
 				D4EC94A478998EBFBF860972 /* Pods_Infinite_Gallery.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		2B1F5BBE2BDFBD8100DAFE57 /* Gallery Layout */ = {
+			isa = PBXGroup;
+			children = (
+				2B1F5BBF2BDFBD9400DAFE57 /* GalleryLayout.swift */,
+			);
+			path = "Gallery Layout";
 			sourceTree = "<group>";
 		};
 		56E833FC2BD987EC00C0259A = {
@@ -165,6 +175,7 @@
 		56E834212BD98D1900C0259A /* Gallery */ = {
 			isa = PBXGroup;
 			children = (
+				2B1F5BBE2BDFBD8100DAFE57 /* Gallery Layout */,
 				56E8342D2BD995EC00C0259A /* View */,
 				56E8342E2BD995FA00C0259A /* View Model */,
 			);
@@ -363,6 +374,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2B1F5BC02BDFBD9400DAFE57 /* GalleryLayout.swift in Sources */,
 				56E8340D2BD987EC00C0259A /* GalleryViewController.swift in Sources */,
 				56E834232BD98D6500C0259A /* AlbumViewModel.swift in Sources */,
 				56E834282BD98E8B00C0259A /* View.swift in Sources */,

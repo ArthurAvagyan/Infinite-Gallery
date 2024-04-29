@@ -13,9 +13,12 @@ class AlbumModel: Object {
 	@Persisted var title: String
 	@Persisted var photos: List<PhotoModel>
 	
-	func update(with album: Album, photos: [Photo]) {
+	func update(with album: Album) {
 		id = album.id
 		title = album.title
+	}
+	
+	func update( photos: [Photo]) {
 		let photoModels = photos.map { photo in
 			let model = PhotoModel()
 			model.albumId = photo.albumId

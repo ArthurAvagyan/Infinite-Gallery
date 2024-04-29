@@ -45,6 +45,14 @@ final class GalleryView: View<GalleryViewModel> {
 			}
 			.store(in: &cancellables)
 		
+		viewModel.onReloadAt
+			.receive(on: DispatchQueue.main)
+			.sink { [weak self] indexPath in
+				guard let self else { return }
+				collectionView.reloadItems(at: [indexPath])
+			}
+			.store(in: &cancellables)
+		
 		viewModel.onReloadWithOffset
 			.sink { [weak self] (offset, fromIndexPath, toIndexPath) in
 				guard let self else { return }

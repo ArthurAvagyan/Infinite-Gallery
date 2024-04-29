@@ -12,6 +12,7 @@ import RealmSwift
 final class GalleryViewModel: ViewModel {
 	
 	private(set) var onReload = PassthroughSubject<Void, Never>()
+	private(set) var onReloadAt = PassthroughSubject<IndexPath, Never>()
 	private(set) var onReloadWithOffset = PassthroughSubject<(CGFloat, IndexPath, IndexPath), Never>()
 
 	var dataModels: [AlbumModel] = []
@@ -24,10 +25,20 @@ final class GalleryViewModel: ViewModel {
 		useCase.getAlbumModels { [weak self] albumModels in
 			guard let self else { return }
 			
-			dataModels = albumModels
-			storedOffsets = Array(repeating: nil, count: dataModels.count)
+			var replaced = false
+			albumModels.forEach { albumModel in
+				if let index = self.dataModels.firstIndex(where: { $0.id == albumModel.id }) {
+					self.dataModels.replaceSubrange(index...index, with: [albumModel])
+					replaced = true
+					self.onReloadAt.send(IndexPath(item: index, section: 0))
+				}
+			}
 			
-			onReload.send()
+			if !replaced {
+				dataModels = albumModels
+				storedOffsets = Array(repeating: nil, count: dataModels.count)
+				onReload.send()
+			}
 		}
 	}
 	

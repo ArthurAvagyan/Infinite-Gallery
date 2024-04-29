@@ -26,6 +26,15 @@ class RealmManager {
 		}
 	}
 	
+	func write(_ block: (() -> Void)) {
+		do {
+			let realm = try Realm()
+			try realm.write(block)
+		} catch {
+			print("Error saving object to Realm: \(error.localizedDescription)")
+		}
+	}
+	
 	// MARK: - CRUD Operations
 	func saveObject<T: Object>(_ object: T) {
 		do {

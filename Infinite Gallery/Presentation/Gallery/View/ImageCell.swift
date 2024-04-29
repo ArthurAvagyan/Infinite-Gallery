@@ -42,10 +42,6 @@ class ImageCell: UICollectionViewCell {
 	}
 	
 	func configure(with image: UIImage?) {
-		image?.prepareForDisplay(completionHandler: { [weak self] preparedImage in
-			DispatchQueue.main.async {
-				self?.imageView.image = preparedImage
-			}
-		})
+		imageView.image = image
 	}
 }

@@ -49,7 +49,7 @@ extension GalleryUseCase {
 		APIManager.shared.getAlbums { result in
 			switch result {
 			case .success(let albums):
-				completion(Array(albums.prefix(3)))
+				completion(Array(albums))
 			case .failure(let error):
 				print(error)
 			}
@@ -60,7 +60,7 @@ extension GalleryUseCase {
 		APIManager.shared.getPhotos(albumId: albumId) { result in
 			switch result {
 			case .success(let photos):
-				completion(Array(photos.prefix(3)))
+				completion(Array(photos))
 			case .failure(let error):
 				print(error)
 			}

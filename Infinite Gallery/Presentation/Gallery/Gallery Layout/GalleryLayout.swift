@@ -30,7 +30,6 @@ class CustomCollectionViewLayout: UICollectionViewFlowLayout {
 		guard let collectionView else { return }
 		let columnWidth = UIScreen.main.bounds.size.width
 		
-		var column = 0
 		var yOffset = CGFloat(0)
 		
 		for item in 0..<collectionView.numberOfItems(inSection: 0) {

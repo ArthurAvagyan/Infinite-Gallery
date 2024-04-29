@@ -60,6 +60,7 @@ final class GalleryView: View<GalleryViewModel> {
 extension GalleryView: UICollectionViewDelegate {
 	
 	func scrollViewDidScroll(_ scrollView: UIScrollView) {
+		guard viewModel.dataModels.count > 0 else { return }
 		let estimatedItemSize = collectionView.contentSize.height / CGFloat(viewModel.dataModels.count)
 		
 		viewModel.scrolled(by: scrollView.contentOffset.y, with: estimatedItemSize) { indexPath in

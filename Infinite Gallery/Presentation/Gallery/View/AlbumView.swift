@@ -24,7 +24,7 @@ final class AlbumView: View<AlbumViewModel> {
 		layout.sectionInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
 		layout.minimumInteritemSpacing = 10
 		layout.minimumLineSpacing = 10
-		layout.itemSize = CGSize(width: (UIScreen.main.bounds.size.width - 40) / 3, height: ((UIScreen.main.bounds.size.height / 4)))
+		layout.itemSize = CGSize(width: (UIScreen.main.bounds.size.width - 40) / 3, height: (UIScreen.main.bounds.size.height / 4) - 40)
 		
 		let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
 		collectionView.translatesAutoresizingMaskIntoConstraints = false

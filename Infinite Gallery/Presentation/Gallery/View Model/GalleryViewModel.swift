@@ -41,7 +41,6 @@ final class GalleryViewModel: ViewModel {
 			updateOffsets(offsetForIndexPath)
 			dataModels.move(fromOffsets: IndexSet(integer: dataModels.count - 1), toOffset: 0)
 			storedOffsets.move(fromOffsets: IndexSet(integer: dataModels.count - 1), toOffset: 0)
-//			onReloadWithOffset.send(estimatedItemSize)
 			onReloadWithOffset.send((estimatedItemSize, IndexPath(item: dataModels.count - 1, section: 0), IndexPath(item: 0, section: 0)))
 		}
 	}
